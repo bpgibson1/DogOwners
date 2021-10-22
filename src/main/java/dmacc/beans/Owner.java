@@ -5,11 +5,22 @@
  */
 package dmacc.beans;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+@Entity
 public class Owner {
+	@Id
+	@GeneratedValue
 	private long id;
 	private String firstName;
 	private String lastName;
 	private String contactNumber;
+	@Autowired
+	private Dog dog;
 	
 	public Owner() {
 		super();
@@ -60,10 +71,21 @@ public class Owner {
 		this.contactNumber = contactNumber;
 	}
 
+	public Dog getDog() {
+		return dog;
+	}
+
+	public void setDog(Dog dog) {
+		this.dog = dog;
+	}
+
 	@Override
 	public String toString() {
 		return "Owner [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", contactNumber="
-				+ contactNumber + "]";
+				+ contactNumber + ", dog=" + dog + "]";
 	}
+
+	
+	
 	
 }

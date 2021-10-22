@@ -5,6 +5,9 @@
  */
 package dmacc.beans;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Dog {
 	private String name;
 	private int size;
