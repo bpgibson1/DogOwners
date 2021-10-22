@@ -4,6 +4,7 @@ package dmacc;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -16,7 +17,7 @@ import dmacc.controller.BeanConfiguration;
 import dmacc.repository.OwnerRepository;
 
 @SpringBootApplication
-public class DogOwnersApplication {
+public class DogOwnersApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DogOwnersApplication.class, args);
@@ -31,6 +32,7 @@ public class DogOwnersApplication {
 	@Autowired
 	OwnerRepository repo;
 	
+	@Override
 	public void run(String... args) throws Exception {
 		
 		ApplicationContext appContext = new AnnotationConfigApplicationContext(BeanConfiguration.class);
@@ -39,8 +41,8 @@ public class DogOwnersApplication {
 		o.setFirstName("TomJerry");
 		repo.save(o);
 		
-		Owner p = new Owner("First", "Last", "515-515-5151");
-		Dog d = new Dog("Dog", 100, "Mut- Dark Brown");
+		Owner p = new Owner("Jake", "Smith", "515-515-5151");
+		Dog d = new Dog("Tank", 100, "Mut- Dark Brown");
 		p.setDog(d);
 		repo.save(p);
 		
