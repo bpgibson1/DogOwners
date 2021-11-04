@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert New or Edit Owner</title>
+</head>
+<body>
+
+	<form th:object="${newOwner}" th:action="@{/update/{id}(id=${newOwner.id})}" method=POST>
+	
+		First Name: <input name="firstName" size="20" th:field="*{firstName}"><br />
+		Last Name: <input name="lastName" size="20" th:field="*{lastName}"><br />
+		Phone Number: <input name="contactNumber" size="20" th:field="*{contactNumber}"><br />
+		Dog Name: <input name="dog.name" size="20" th:field="*{dog.name}"><br />
+		Dog Size: <input name="dog.size" size="20" th:field="*{dog.size}"><br />
+		Dog Description: <input name="dog.description" size="20" th:field="*{dog.description}"><br />
+		
+		<input name="Submit" type="submit" value="submit" />
+	</form>
+	
+	<a href="../viewAll">View All Owners</a>
+
+</body>
+</html>
