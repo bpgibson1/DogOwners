@@ -4,13 +4,70 @@
 <meta charset="UTF-8">
 <title>Insert New or Edit Owner</title>
 </head>
+<script type="text/javascript">
+	var re = /^[\w ]+$/;
+	
+	function regularExp(inputField, name){
+		if(!re.test(inputField)){
+			alert("Error: "+ name + " contains invalid characters!");
+			return false;
+		}
+		
+		return true;
+	}
+	
+	function checkForm(form){
+		if(form.firstName.value != ""){
+			if(regularExp(form.firstName.value, "First name") == false){
+				form.firstName.focus();
+				return false;
+			}
+		}
+		else{
+			alert("Error: First Name is empty!");
+			form.firstName.focus();
+			return false;
+		}
+		
+		if(form.lastName.value != ""){
+			if(regularExp(form.lastName.value, "Last name") == false){
+				form.firstName.focus();
+				return false;
+			}
+		}
+		else{
+			alert("Error: Last Name is empty!");
+			form.lastName.focus();
+			return false;
+		}
+		
+		if(form.contactNumber.value != ""){
+			var numberVal = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+			if(!numberVal.test(form.contactNumber.value)){
+				alert("Error: Phone number has incorrect format, ###-###-####");
+				form.contactNumber.focus();
+				return false;
+			}
+		}
+		else{
+			alert("Error: Phone Number is empty!");
+			form.contactNumber.focus();
+			return false;
+		}
+		
+		
+		return true;
+	}
+	
+
+</script>
 <body>
 
-	<form th:object="${newOwner}" th:action="@{/update/{id}(id=${newOwner.id})}" method=POST>
+	<form th:object="${newOwner}" th:action="@{/update/{id}(id=${newOwner.id})}" method=POST onsubmit="return checkForm(this);">
 	
 		First Name: <input name="firstName" size="20" th:field="*{firstName}"><br />
 		Last Name: <input name="lastName" size="20" th:field="*{lastName}"><br />
-		Phone Number: <input name="contactNumber" size="20" th:field="*{contactNumber}"><br />
+		Phone Number: <input placeholder="###-###-####" name="contactNumber" size="20" th:field="*{contactNumber}"><br />
 		Dog Name: <input name="dog.name" size="20" th:field="*{dog.name}"><br />
 		Dog Size: <input name="dog.size" size="20" th:field="*{dog.size}"><br />
 		Dog Description: <input name="dog.description" size="20" th:field="*{dog.description}"><br />
